@@ -2,7 +2,7 @@
 function makeResponsive() {
 
     //Selecting svgArea
-    var svgArea = d3.select("scatter").select("svg");
+    var svgArea = d3.select("body").select("scatter").select("svg");
 
     //Deleting svgArea if it already exists
     if (!svgArea.empty()) {
@@ -22,11 +22,11 @@ function makeResponsive() {
     };
 
     //Defining Chart Height and Chart Width
-    var chartHeight = svgHeight - margin.top - margin.bottom;
-    var chartWidth = svgWidth - margin.left - margin.right;
+    var height = svgHeight - margin.top - margin.bottom;
+    var width = svgWidth - margin.left - margin.right;
 
     //Creating SVG Container
-    var svg = d3.select("scatter").append("svg")
+    var svg = d3.select("body").select("scatter").append("svg")
           .attr("height", svgHeight)
           .attr("width", svgWidth);
 
@@ -49,11 +49,11 @@ function makeResponsive() {
     }
 
     function renderAxes(newXScale, new_xaxis) {
-      var bottom_Axis = d3.axisBottom(newXScale);
+      var bottomAxis = d3.axisBottom(newXScale);
 
       new_xaxis.transition()
         .duration(1000)
-        .call(bottom_Axis);
+        .call(bottomAxis);
 
       return new_xaxis;
     }
@@ -112,3 +112,98 @@ function makeResponsive() {
         data.obesity = +data.obesity;
         data.smokes = +data.smokes;
       });
+
+      var xLinearScale = xScale(usa_data, xaxis);
+
+      var yLinearScale = d3.scaleLinear()
+        .domain([0, d3.max(usa_data, d => d.obesity)])
+        .range([height, 0]);
+
+
+      var bottomAxis = d3.axisBottom(xLinearScale);
+      var leftAxis = d3.axisLeft(yLinearScale);
+
+      var new_xaxis = chartGroup.append("g")
+        .classed("x-axis", true)
+        .attr("transform", `translate(0, ${height})`)
+        .call(bottomAxis);
+
+      chartGroup.append("g")
+        .call(leftAxis);
+
+      var circlesGroup = chartGroup.selectAll("circle")
+        .data(usa_data)
+        .enter()
+        .append("circle")
+        .attr("cx", d => xLinearScale(d[xaxis]))
+        .attr("cy", d => yLinearScale(d.obesity))
+        .attr("r", 20)
+        .attr("fill", "blue")
+        .attr("opacity", ".5");
+
+        var labelsGroup = chartGroup.append("g")
+          .attr("transform", `translate(${width / 2}, ${height + 30})`);
+
+        var povertyLabel = labelsGroup.append("text")
+          .attr("x", 0)
+          .attr("y", 20)
+          .attr("value", "poverty")
+          .classed("active", true)
+          .text("Poverty");
+
+        var ageLabel = labelsGroup.append("text")
+          .attr("x", 0)
+          .attr("y", 40)
+          .attr("value", "age") // value to grab for event listener
+          .classed("inactive", true)
+          .text("Age");
+
+          var incomeLabel = labelsGroup.append("text")
+            .attr("x", 0)
+            .attr("y", 60)
+            .attr("value", "income") // value to grab for event listener
+            .classed("inactive", true)
+            .text("Income");
+
+        // append y axis
+        chartGroup.append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 0 - margin.left)
+          .attr("x", 0 - (height / 2))
+          .attr("dy", "1em")
+          .classed("axis-text", true)
+          .text("healthcare");
+
+          var circlesGroup = updateToolTip(xaxis, circlesGroup);
+
+          // x axis labels event listener
+          labelsGroup.selectAll("text")
+            .on("click", function() {
+              // get value of selection
+              var value = d3.select(this).attr("value");
+              if (value !== xaxis) {
+
+                // replaces chosenXAxis with value
+                xaxis = value;
+
+                // console.log(chosenXAxis)
+
+                // functions here found above csv import
+                // updates x scale for new data
+                xLinearScale = xScale(usa_data, xaxis);
+
+                // updates x axis with transition
+                new_xaxis = renderAxes(xLinearScale, new_xaxis);
+
+                // updates circles with new x values
+                circlesGroup = renderCircles(circlesGroup, xLinearScale, xaxis);
+
+                // updates tooltips with new info
+                circlesGroup = updateToolTip(xaxis, circlesGroup);
+
+              }
+            });
+          });
+};
+makeResponsive();
+d3.select(window).on("resize", makeResponsive);

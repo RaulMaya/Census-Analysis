@@ -2,7 +2,7 @@
 function makeResponsive() {
 
     //Selecting svgArea
-    var svgArea = d3.select("body").select("scatter").select("svg");
+    var svgArea = d3.select("body").select("#scatter").select("svg");
 
     //Deleting svgArea if it already exists
     if (!svgArea.empty()) {
@@ -10,8 +10,8 @@ function makeResponsive() {
     };
 
     //Establishing SVG Height and Width
-    var svgHeight = window.innerHeight;
-    var svgWidth = window.innerWidth;
+    var svgWidth = 960;
+    var svgHeight = 500;
 
     //Setting Margins
     var margin = {
@@ -26,7 +26,7 @@ function makeResponsive() {
     var width = svgWidth - margin.left - margin.right;
 
     //Creating SVG Container
-    var svg = d3.select("body").select("scatter").append("svg")
+    var svg = d3.select("body").select("#scatter").append("svg")
           .attr("height", svgHeight)
           .attr("width", svgWidth);
 
@@ -35,7 +35,6 @@ function makeResponsive() {
           .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
     var xaxis = "poverty";
-    var yaxis = "healthcare";
 
     function xScale(usa_data, xaxis) {
       var xLinearScale = d3.scaleLinear()
@@ -137,9 +136,11 @@ function makeResponsive() {
         .append("circle")
         .attr("cx", d => xLinearScale(d[xaxis]))
         .attr("cy", d => yLinearScale(d.obesity))
-        .attr("r", 20)
-        .attr("fill", "blue")
-        .attr("opacity", ".5");
+        .attr("r", 8)
+        .attr("fill", "lightblue")
+        .attr("opacity", "1")
+        .attr("class", "abbr")
+        .text(d=>d.abbr);
 
         var labelsGroup = chartGroup.append("g")
           .attr("transform", `translate(${width / 2}, ${height + 30})`);

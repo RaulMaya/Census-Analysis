@@ -118,6 +118,7 @@ function renderYLabels(labels, newYScale, chosenYAxis) {
 function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
   var xlabel;
+  // X Labels Options
 
   if (chosenXAxis === "poverty") {
     xlabel = "Poverty";
@@ -129,7 +130,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
       xlabel = "Income";
   }
 
-
+  //Y Labels Options
   var ylabel;
 
   if (chosenYAxis === "healthcare") {
@@ -142,6 +143,8 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
       ylabel = "Smokes";
   }
 
+
+  //Establishing the Mouse Over and Mouse Out
   var toolTip = d3.tip()
     .attr("class", "tooltip")
     .offset([80, -60])
@@ -153,32 +156,33 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
   circlesGroup.on("mouseover", function(data) {
     toolTip.show(data);
-    })
+  });
 
     .on("mouseout", function(data, index) {
       toolTip.hide(data);
-      });
+    });
 
-    return circlesGroup;
+  return circlesGroup;
 }
 
+//Extracting Data From The CSV File, Following a Path
 d3.csv("StarterCode/assets/data/usa_data.csv").then(function(usa_data, err) {
   if (err) throw err;
 
   usa_data.forEach(function(data) {
-    data.poverty = +data.poverty;
-    data.age = +data.age;
-    data.income = +data.income;
-    data.healthcare = +data.healthcare;
-    data.obesity = +data.obesity;
-    data.smokes = +data.smokes;
-  });
+  data.poverty = +data.poverty;
+  data.age = +data.age;
+  data.income = +data.income;
+  data.healthcare = +data.healthcare;
+  data.obesity = +data.obesity;
+  data.smokes = +data.smokes;
 
-  var xLinearScale = xScale(usa_data, xaxis);
+});
 
-  var yLinearScale = d3.scaleLinear()
-    .domain([0, d3.max(usa_data, d => d.obesity)])
-    .range([height, 0]);
+  //Redifining my Linear Scales
+  var xLinearScale = xScale(usa_data, chosenXAxis);
+  var yLinearScale = yScale(usa_data, chosenYAxis);
+
 
 
   var bottomAxis = d3.axisBottom(xLinearScale);

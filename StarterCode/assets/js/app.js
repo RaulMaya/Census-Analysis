@@ -114,25 +114,39 @@ function renderYLabels(labels, newYScale, chosenYAxis) {
   return labels;
 };
 
-function updateToolTip(xaxis, circlesGroup) {
+//Definition of UpdateToolTip
+function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup) {
 
-  var label;
+  var xlabel;
 
-  if (xaxis === "poverty") {
-    label = "Poverty";
+  if (chosenXAxis === "poverty") {
+    xlabel = "Poverty";
   }
-  else if (xaxis === "age") {
-      label = "Age";
+  else if (chosenXAxis === "age") {
+      xlabel = "Age";
   }
-  else if (xaxis === "income") {
-      label = "Income";
+  else if (chosenXAxis === "income") {
+      xlabel = "Income";
+  }
+
+
+  var ylabel;
+
+  if (chosenYAxis === "healthcare") {
+    ylabel = "Healthcare";
+  }
+  else if (chosenYAxis === "obesity") {
+      ylabel = "Obesity";
+  }
+  else if (chosenYAxis === "smokes") {
+      ylabel = "Smokes";
   }
 
   var toolTip = d3.tip()
     .attr("class", "tooltip")
     .offset([80, -60])
     .html(function(d) {
-      return (`${d.state}<br>${label} ${d[xaxis]}`);
+      return (`<b>${d.state}</b><br><b>${xlabel}:</b> ${d[chosenXAxis]}<br><b>${ylabel}:</b> ${d[chosenYAxis]}`);
     });
 
   circlesGroup.call(toolTip);

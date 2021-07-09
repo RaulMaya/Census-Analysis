@@ -73,17 +73,46 @@ function renderYAxes(newYScale, yAxis) {
     .call(bottomYAxis);
 
   return yAxis;
-}
+};
 
-
-function renderCircles(circlesGroup, newXScale, xaxis) {
+//Creation of Circles in X Axis
+function renderXCircles(circlesGroup, newXScale, chosenXAxis) {
 
   circlesGroup.transition()
     .duration(1000)
-    .attr("cx", d => newXScale(d[xaxis]));
+    .attr("cx", d => newXScale(d[chosenXAxis]))
 
   return circlesGroup;
 }
+
+//Creation of Circles in Y Axis
+function renderYCircles(circlesGroup, newYScale, chosenYAxis) {
+
+  circlesGroup.transition()
+    .duration(1000)
+    .attr("cy", d => newYScale(d[chosenYAxis]));
+
+
+  return circlesGroup;
+};
+
+//Defining Labels of X-Axis
+function renderXLabels(labels, newXScale, chosenXAxis) {
+  labels.transition()
+  .duration(1000)
+  .attr("x", d => newXScale(d[chosenXAxis]));
+
+  return labels;
+};
+
+//Defining Labels of Y-Axis
+function renderYLabels(labels, newYScale, chosenYAxis) {
+  labels.transition()
+  .duration(1000)
+  .attr("y", d => newYScale(d[chosenYAxis]));
+
+  return labels;
+};
 
 function updateToolTip(xaxis, circlesGroup) {
 

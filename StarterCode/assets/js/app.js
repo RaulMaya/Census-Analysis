@@ -51,17 +51,30 @@ function yScale(usa_data, chosenYAxis) {
     .range([height, 0]);
 
   return yLinearScale;
+};
 
+// Creating my X-Axis
+function renderXAxes(newXScale, xAxis) {
+  var bottomXAxis = d3.axisBottom(newXScale);
 
-function renderAxes(newXScale, new_xaxis) {
-  var bottomAxis = d3.axisBottom(newXScale);
-
-  new_xaxis.transition()
+  xAxis.transition()
     .duration(1000)
-    .call(bottomAxis);
+    .call(bottomXAxis);
 
-  return new_xaxis;
+  return xAxis;
+};
+
+// Creating my Y-Axis
+function renderYAxes(newYScale, yAxis) {
+  var bottomYAxis = d3.axisLeft(newYScale);
+
+  yAxis.transition()
+    .duration(1000)
+    .call(bottomYAxis);
+
+  return yAxis;
 }
+
 
 function renderCircles(circlesGroup, newXScale, xaxis) {
 

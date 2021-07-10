@@ -211,7 +211,7 @@ d3.csv("StarterCode/assets/data/usa_data.csv").then(function(usa_data, err) {
   .attr("opacity", "0.5")
 
   //Default Labels Group Values
-  var labels =  chartGroup.selectAll("text")
+  var labels =  chartGroup.append("g").selectAll("text")
   .data(usa_data)
   .enter()
   .append("text")

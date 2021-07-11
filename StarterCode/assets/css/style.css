@@ -39,6 +39,7 @@ h1 {
   font-family: tahoma; color: #0018a1;
   animation: title 1.2s forwards linear;
   text-align:center;
+  font-size: 100px;
 }
 
 h2 {

@@ -4,65 +4,6 @@
   text-anchor: middle;
 }
 
-/* font size dependent on radius, see app.js */
-.stateText {
-  font-family: sans-serif;
-  fill: #fff;
-  text-anchor: middle;
-}
-
-.stateCircle {
-  fill: #89bdd3;
-  stroke: #e3e3e3;
-}
-
-.chart {
-  display: block;
-  margin: 0;
-}
-
-.d3-tip {
-  padding: 6px;
-  font-size: 12px;
-  line-height: 1;
-  line-height: 1.5em;
-  color: #fff;
-  text-align: center;
-  text-transform: capitalize;
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 4px;
-}
-
-.scatter::before {
-  position: absolute;
-  top: 30px;
-  left: 110px;
-  z-index: -1;
-  display: block;
-  width: 856px;
-  height: 500px;
-  content: " ";
-  background-image: url("usa_flag.jpg");
-  background-repeat: no-repeat;
-  background-position: 50% 0;
-  background-size: cover;
-  opacity: 0.4;
-}
-
-.tooltip {
-  position: absolute;
-  width: 135px;
-  height: 60px;
-  padding: 2px;
-  padding-top: 8px;
-  font: 12px sans-serif;
-  color: white;
-  text-align: center;
-  background: #e02727;
-  border: 0;
-  border-radius: 10px;
-}
-
 .axislabels {
   font-family: sans-serif;
   font-weight: bold;
@@ -88,6 +29,52 @@
 .inactive:hover {
   fill: #54e7db;
   cursor: pointer;
+}
+
+
+.stateText {
+  font-family: sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  fill: #FFF;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.stateCircle {
+  fill: #4169E1	;
+  opacity: 0.80;
+  stroke: #e3e3e3;
+}
+
+.inactive-circle:hover {
+  fill: #FF0000;
+  opacity: 0.70;
+  stroke: #000;
+  stroke-width: 1;
+  stroke-opacity: 1;
+  cursor: pointer;
+}
+
+.chart {
+  display: block;
+  margin: 0;
+}
+
+.d3-tip {
+  padding: 6px;
+  font-size: 12px;
+  line-height: 1;
+  line-height: 1.5em;
+  color: #FFF;
+  text-align: center;
+  text-transform: capitalize;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+}
+
+hr.tooltip-hr {
+  border: 1px solid rgb(128, 34, 34);
 }
 
 /* Mobile Rules */

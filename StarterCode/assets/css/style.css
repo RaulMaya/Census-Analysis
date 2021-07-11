@@ -12,6 +12,7 @@ html {
 body {
   /* Padding bottom by footer height */
   padding-bottom: 80px;
+  background-color: #c9c9c9ee;
 }
 
 #footer {
@@ -22,68 +23,20 @@ body {
   padding-top: 20px;
   padding-bottom: 40px;
   text-align: center;
-  background-color: #05004d;
-  border: 1px solid #ff0000
+  background-color: #af1a1a;;
 }
 
 #footer p {
   margin: 0;
   font-size: 16px;
+  color:#ffffff
 }
 
-.scatter::before {
-  position: absolute;
-  top: 30px;
-  left: 110px;
-  z-index: -1;
-  display: block;
-  width: 856px;
-  height: 500px;
-  content: " ";
-  background-image: url("usa_flag.jpg");
-  background-repeat: no-repeat;
-  background-position: 50% 0;
-  background-size: cover;
-  opacity: 0.4;
+h2 {
+  color:#0018a1;
+  text-align:center;
 }
 
-.tooltip {
-  position: absolute;
-  width: 135px;
-  height: 60px;
-  padding: 2px;
-  padding-top: 8px;
-  font: 12px sans-serif;
-  color: white;
+p {
   text-align: center;
-  background: #e02727;
-  border: 0;
-  border-radius: 10px;
-}
-
-.axislabels {
-  font-family: sans-serif;
-  font-weight: bold;
-  fill: #af1a1a;
-  text-anchor: middle;
-}
-
-.active {
-  font-weight: bold;
-  fill: #000;
-  fill: #af1a1a;
-  transition: fill 0.3s ease-out;
-  text-anchor: middle;
-}
-
-.inactive {
-  font-weight: lighter;
-  fill: #102bc5;
-  transition: fill 0.3s ease-out;
-  text-anchor: middle;
-}
-
-.inactive:hover {
-  fill: #54e7db;
-  cursor: pointer;
 }

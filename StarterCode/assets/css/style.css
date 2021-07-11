@@ -23,13 +23,22 @@ body {
   padding-top: 20px;
   padding-bottom: 40px;
   text-align: center;
-  background-color: #af1a1a;;
+  background-color: #af1a1a;
 }
 
 #footer p {
   margin: 0;
   font-size: 16px;
   color:#ffffff
+}
+
+h1 {
+  color:#0018a1;
+  margin-top: 10px;
+  -webkit-text-stroke: 1px #af1a1a;
+  font-family: tahoma; color: #0018a1;
+  animation: title 1.2s forwards linear;
+  text-align:center;
 }
 
 h2 {

@@ -66,15 +66,15 @@
   font-size: 12px;
   line-height: 1;
   line-height: 1.5em;
-  color: #FFF;
+  color: #ffffff;
   text-align: center;
   text-transform: capitalize;
-  background: rgba(0, 0, 0, 0.8);
-  border-radius: 4px;
+  background: #0018a1;
+  border-radius: 10px;
 }
 
 hr.tooltip-hr {
-  border: 1px solid rgb(128, 34, 34);
+  border: 2px solid rgb(128, 34, 34);
 }
 
 /* Mobile Rules */
